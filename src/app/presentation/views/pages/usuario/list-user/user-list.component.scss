@@ -1,0 +1,51 @@
+// .list-container {
+//   max-width: 800px;             /* Ancho máximo para la tabla */
+//   margin: 40px auto;            /* Centra la tabla horizontalmente */
+//   padding: 20px;                /* Espaciado interno */
+//   text-align: center;           /* Centra el título */
+// }
+
+// .add-student-button {
+//   display: inline-flex;         /* Alinea el icono y el texto */
+//   align-items: center;          /* Centra verticalmente el icono y el texto */
+//   margin-bottom: 20px;          /* Espaciado debajo del botón */
+//   font-weight: bold;            /* Negrita para destacar el botón */
+//   font-size: 16px;              /* Tamaño de texto más grande */
+// }
+
+// .add-student-button mat-icon {
+//   margin-right: 8px;            /* Espacio entre el icono y el texto */
+// }
+
+// table {
+//   width: 100%;                  /* Ancho completo de la tabla */
+//   margin-top: 20px;
+// }
+
+// h2 {
+//   margin-bottom: 20px;          /* Espacio debajo del título */
+// }
+
+// button[mat-icon-button] {
+//   margin: 0 5px;                /* Espacio entre los botones */
+// }
+
+
+.table-container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+mat-paginator {
+  margin-top: 20px;
+}

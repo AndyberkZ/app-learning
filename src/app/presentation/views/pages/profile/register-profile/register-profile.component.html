@@ -1,0 +1,53 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+    <h2 class="text-2xl font-bold text-center mb-6">Registro</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 font-semibold mb-2">Nombre</label>
+        <input
+          formControlName="name"
+          type="text"
+          id="name"
+          class="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+          placeholder="Ingrese su nombre"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 font-semibold mb-2">Correo</label>
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          class="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+          placeholder="Ingrese su correo"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 font-semibold mb-2">Contraseña</label>
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          class="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+          placeholder="Ingrese su contraseña"
+        />
+      </div>
+      <div class="mb-6">
+        <label for="confirmPassword" class="block text-gray-700 font-semibold mb-2">Confirmar Contraseña</label>
+        <input
+          formControlName="confirmPassword"
+          type="password"
+          id="confirmPassword"
+          class="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-500"
+          placeholder="Confirme su contraseña"
+        />
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition duration-200"
+      >
+        Registrarse
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+
+
+<nav class="bg-gray-800 text-white p-4 flex justify-center items-center">
+  <ul class="flex space-x-8">
+    <!-- Menú del Administrador -->
+    <li *ngIf="isAdmin()" class="relative">
+      <span class="font-bold cursor-pointer" (click)="toggleAdminMenu()">Panel de Admin</span>
+      <ul [class.hidden]="!isAdminMenuOpen" class="absolute left-0 mt-2 bg-gray-700 text-white rounded-md shadow-lg">
+        <li>
+          <a
+            href="/edit-profile"
+            class="block px-4 py-2 hover:bg-gray-600 rounded-t-md"
+          >
+            Editar Perfil
+          </a>
+        </li>
+        <li>
+          <a
+            href="/register"
+            class="block px-4 py-2 hover:bg-gray-600 rounded-b-md"
+          >
+            Crear Perfil
+          </a>
+        </li>
+        <li>
+          <a
+            href="/admin-progress"
+            class="block px-4 py-2 hover:bg-gray-600 rounded-b-md"
+          >
+            Progreso de Estudiantes
+          </a>
+        </li>
+      </ul>
+    </li>
+
+
+
+    <!-- <li *ngIf="isUser()" class="relative">
+      <span class="font-bold cursor-pointer" (click)="toggleUserMenu()">Panel de Usuario</span>
+      <ul [class.hidden]="!isUserMenuOpen" class="absolute left-0 mt-2 bg-gray-700 text-white rounded-md shadow-lg">
+        <li>
+          <a
+            href="/home"
+            class="block px-4 py-2 hover:bg-gray-600 rounded-t-md"
+          >
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a
+          href="/students/new"
+            class="block px-4 py-2 hover:bg-gray-600 rounded-b-md"
+          >
+            Listar perfil
+          </a>
+        </li>
+        <li>
+          <a
+            href="/user-progress"
+            class="block px-4 py-2 hover:bg-gray-600 rounded-b-md"
+          >
+            Mi Progreso
+          </a>
+        </li>
+      </ul>
+    </li> -->
+
+
+
+
+
+
+
+
+
+    <!-- Menú del Usuario -->
+    <li *ngIf="isAdmin()" class="relative"><a href="/students/list" class="hover:text-gray-400">Perfil</a></li>
+
+    <!-- Menú del Usuario -->
+    <li *ngIf="isUser()" class="relative"><a href="/students/list" class="hover:text-gray-400">Perfil</a></li>
+
+    <li *ngIf="isUser()" class="relative"><a href="/recommendation/list" class="hover:text-gray-400">Recomendación</a></li>
+
+    <!-- Opción de Cerrar Sesión para todos los usuarios -->
+    <li>
+      <a  (click)="logout()" class="hover:text-gray-400">Cerrar Sesión</a>
+    </li>
+  </ul>
+</nav>

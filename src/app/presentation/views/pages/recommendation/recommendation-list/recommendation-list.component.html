@@ -1,0 +1,67 @@
+<div class="container">
+  <h2 class="title">Rendimiento y Recomendaciones para {{ studentName }}</h2>
+
+  <!-- Tabla de Rendimiento por Actividad -->
+  <h3 class="subtitle">Rendimiento por Actividad</h3>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 performance-table">
+
+    <!-- Columnas de la Tabla -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Título</th>
+      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="contentTags">
+      <th mat-header-cell *matHeaderCellDef>Etiquetas</th>
+      <td mat-cell *matCellDef="let element">{{ element.contentTags.join(', ') }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef>Puntaje</th>
+      <td mat-cell *matCellDef="let element">{{ element.score }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="progress">
+      <th mat-header-cell *matHeaderCellDef>Progreso</th>
+      <td mat-cell *matCellDef="let element">{{ element.progress }}%</td>
+    </ng-container>
+
+    <ng-container matColumnDef="completionTime">
+      <th mat-header-cell *matHeaderCellDef>Tiempo (min)</th>
+      <td mat-cell *matCellDef="let element">{{ element.completionTime }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="preference">
+      <th mat-header-cell *matHeaderCellDef>Preferencia</th>
+      <td mat-cell *matCellDef="let element">{{ element.preference }}</td>
+    </ng-container>
+
+    <!-- Filas de la tabla -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Panel de Recomendaciones y Factores -->
+  <mat-accordion class="recommendation-panel">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Actividades Recomendadas </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <ul class="recommended-list">
+        <li *ngFor="let activity of recommendedActivities">
+          <strong>{{ activity.title }}</strong> - Etiquetas: {{ activity.contentTags.join(', ') }}
+        </li>
+      </ul>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Factores de Rendimiento </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <p *ngIf="factors.preference"><strong>Preferencia:</strong> {{ factors?.preference | percent }}</p>
+      <p><strong>Puntaje Promedio:</strong> {{ factors?.averageScore }}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
