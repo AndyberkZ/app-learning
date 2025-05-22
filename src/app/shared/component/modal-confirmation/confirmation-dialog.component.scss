@@ -1,0 +1,215 @@
+.delete-dialog-container {
+  width: 650px;
+  max-width: 100%;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  .dialog-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    background-color: #FFF3E0;  // Fondo naranja claro
+    border-bottom: 1px solid #FFE0B2;
+
+    .header-icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background-color: #FFA000;  // Naranja más intenso
+      border-radius: 50%;
+      margin-right: 12px;
+
+      .header-icon {
+        color: white;
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .dialog-title {
+      margin: 0;
+      color: #E65100;  // Naranja oscuro
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+  }
+
+  .dialog-content {
+    padding: 20px 24px;
+
+    .student-info-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .student-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: #E3F2FD;  // Azul claro
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 16px;
+
+        mat-icon {
+          color: #1976D2;  // Azul
+          font-size: 28px;
+        }
+      }
+
+      .student-details {
+        .student-name {
+          margin: 0 0 4px 0;
+          font-size: 1.1rem;
+          color: #333;
+        }
+
+        .detail-row {
+          display: flex;
+          align-items: center;
+          margin: 6px 0;
+          font-size: 0.9rem;
+
+          .detail-icon {
+            color: #757575;  // Gris
+            font-size: 18px;
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+          }
+
+          .detail-text {
+            color: #424242;  // Gris oscuro
+          }
+        }
+      }
+    }
+
+    .warning-message {
+      display: flex;
+      align-items: flex-start;
+      background-color: #FFF8E1;  // Amarillo claro
+      padding: 12px 16px;
+      border-radius: 6px;
+      border-left: 4px solid #FFA000;  // Borde izquierdo naranja
+
+      .warning-icon {
+        color: #FF6D00;  // Naranja
+        font-size: 22px;
+        margin-right: 12px;
+        margin-top: 2px;
+      }
+
+      .warning-text {
+        font-size: 0.9rem;
+        color: #5D4037;  // Marrón oscuro
+
+        strong {
+          color: #E65100;  // Naranja oscuro
+        }
+      }
+    }
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 24px;
+    border-top: 1px solid #EEEEEE;
+    margin: 0;
+
+    button {
+      margin-left: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      min-width: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      mat-icon {
+        margin-right: 8px;
+        font-size: 20px;
+      }
+    }
+
+    // .cancel-button {
+    //   color: #616161;  // Gris
+    //   border-color: #BDBDBD;  // Gris claro
+
+    //   &:hover {
+    //     background-color: #FAFAFA;  // Gris muy claro
+    //   }
+    // }
+
+
+
+    .cancel-button {
+  background-color: #797575;  // Rojo
+  color: #e7dfdf;
+  border-radius: 6px;  // Bordes redondeados (ajusta el valor según prefieras)
+  transition: all 0.3s ease;  // Transición suave para efectos hover
+      padding: 10px;
+  // Efecto hover
+  &:hover {
+    background-color: #6b6060;  // Rojo oscuro
+    transform: translateY(-1px);  // Efecto de levitación sutil
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);  // Sombra al hacer hover
+  }
+
+  // Efecto cuando se presiona el botón
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  // Estilo para el icono
+  mat-icon {
+    color: white;
+    transition: transform 0.3s ease;  // Transición para el icono
+
+    // Efecto hover para el icono
+    &:hover {
+      transform: scale(1.1);  // El icono crece ligeramente al pasar el mouse
+    }
+  }
+}
+
+    .confirm-button {
+  background-color: #D32F2F;  // Rojo
+  color: white;
+  border-radius: 6px;  // Bordes redondeados (ajusta el valor según prefieras)
+  transition: all 0.3s ease;  // Transición suave para efectos hover
+      padding: 10px;
+  // Efecto hover
+  &:hover {
+    background-color: #B71C1C;  // Rojo oscuro
+    transform: translateY(-1px);  // Efecto de levitación sutil
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);  // Sombra al hacer hover
+  }
+
+  // Efecto cuando se presiona el botón
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  // Estilo para el icono
+  mat-icon {
+    color: white;
+    transition: transform 0.3s ease;  // Transición para el icono
+
+    // Efecto hover para el icono
+    &:hover {
+      transform: scale(1.1);  // El icono crece ligeramente al pasar el mouse
+    }
+  }
+}
+  }
+}

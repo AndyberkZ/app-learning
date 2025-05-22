@@ -66,3 +66,43 @@
 // .register-link a:hover {
 //   text-decoration: underline;
 // }
+.excellent-performance {
+  border: 2px solid green;
+  background-color: #e8f5e9;
+  color: green;
+}
+
+.normal-performance {
+  border: 2px solid yellow;
+  background-color: #fffde7;
+  color: #f9a825;
+}
+
+.low-performance {
+  border: 2px solid red;
+  background-color: #ffebee;
+  color: red;
+}
+
+.performance-container {
+  max-width: 600px;
+  margin: 20px auto;
+
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin: 20px;
+}
+
+img {
+  object-fit: cover;
+}

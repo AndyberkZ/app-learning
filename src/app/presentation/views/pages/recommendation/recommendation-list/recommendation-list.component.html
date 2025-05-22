@@ -1,11 +1,11 @@
-<div class="container">
+<!-- <div class="container">
   <h2 class="title">Rendimiento y Recomendaciones para {{ studentName }}</h2>
 
-  <!-- Tabla de Rendimiento por Actividad -->
+
   <h3 class="subtitle">Rendimiento por Actividad</h3>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 performance-table">
 
-    <!-- Columnas de la Tabla -->
+
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>Título</th>
       <td mat-cell *matCellDef="let element">{{ element.title }}</td>
@@ -36,12 +36,12 @@
       <td mat-cell *matCellDef="let element">{{ element.preference }}</td>
     </ng-container>
 
-    <!-- Filas de la tabla -->
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <!-- Panel de Recomendaciones y Factores -->
+
   <mat-accordion class="recommendation-panel">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -50,7 +50,7 @@
 
       <ul class="recommended-list">
         <li *ngFor="let activity of recommendedActivities">
-          <strong>{{ activity.title }}</strong> - Etiquetas: {{ activity.contentTags.join(', ') }}
+          <strong>{{ activity.title }}</strong> : {{ activity.contentTags.join(', ') }}
         </li>
       </ul>
     </mat-expansion-panel>
@@ -64,4 +64,187 @@
       <p><strong>Puntaje Promedio:</strong> {{ factors?.averageScore }}</p>
     </mat-expansion-panel>
   </mat-accordion>
+</div> -->
+
+
+
+
+
+
+<div class="performance-dashboard">
+  <!-- Header con información del estudiante -->
+  <div class="dashboard-header">
+    <div class="student-info">
+      <mat-icon class="student-icon">account_circle</mat-icon>
+      <div>
+        <h1 class="student-name">{{ studentName }}</h1>
+        <div class="student-stats">
+          <div class="stat-item">
+            <mat-icon>star</mat-icon>
+            <span>Puntaje promedio: {{ factors?.averageScore || 'N/A' }}</span>
+          </div>
+          <div class="stat-item">
+            <mat-icon>favorite</mat-icon>
+            <span>Preferencia: {{ factors?.preference | percent  }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla de Rendimiento -->
+  <div class="performance-section">
+    <div class="section-header">
+      <mat-icon>assessment</mat-icon>
+      <h2>Rendimiento por Actividad</h2>
+    </div>
+
+    <div class="table-container mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="performance-table">
+        <!-- Columnas -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Título</th>
+          <td mat-cell *matCellDef="let element" class="activity-title">
+            <mat-icon class="activity-icon">assignment</mat-icon>
+            {{ element.title }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contentTags">
+          <th mat-header-cell *matHeaderCellDef>Habilidades</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="tags-container">
+              <span class="tag" *ngFor="let tag of element.contentTags">{{ tag }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="score">
+          <th mat-header-cell *matHeaderCellDef>Puntaje</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="score-container">
+              <mat-progress-bar mode="determinate" [value]="normalizeScore(element.score)"
+        [color]="getScoreColor(element.score)">></mat-progress-bar>
+              <span class="score-value">{{ element.score }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="progress">
+          <th mat-header-cell *matHeaderCellDef>Progreso</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="progress-container">
+              <mat-progress-spinner [diameter]="40" [strokeWidth]="4"
+                [mode]="'determinate'" [value]="element.progress"
+                [color]="getProgressColor(element.progress)"></mat-progress-spinner>
+              <span class="progress-value">{{ element.progress }}%</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="completionTime">
+          <th mat-header-cell *matHeaderCellDef>Tiempo</th>
+          <td mat-cell *matCellDef="let element" class="time-cell">
+            <mat-icon class="time-icon">access_time</mat-icon>
+            {{ element.completionTime }} min
+          </td>
+        </ng-container>
+
+
+
+            <ng-container matColumnDef="preference">
+      <th mat-header-cell *matHeaderCellDef>Preferencia</th>
+      <td mat-cell *matCellDef="let element">{{ element.preference }}</td>
+    </ng-container>
+
+        <!-- Filas -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Panel de Recomendaciones -->
+  <div class="recommendations-section">
+    <mat-accordion class="recommendation-accordion">
+      <mat-expansion-panel class="recommendation-panel" expanded="true">
+        <mat-expansion-panel-header class="panel-header">
+          <mat-panel-title class="panel-title">
+            <mat-icon>recommend</mat-icon>
+            <span>Actividades Recomendadas</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="recommendations-grid">
+          <div *ngFor="let activity of recommendedActivities" class="activity-card">
+            <div class="card-header">
+              <mat-icon class="card-icon">task_alt</mat-icon>
+              <h3 class="card-title">{{ activity.title }}</h3>
+            </div>
+            <div class="card-tags">
+              <span *ngFor="let tag of activity.contentTags" class="tag">{{ tag }}</span>
+            </div>
+            <!-- <div class="card-footer">
+              <button mat-stroked-button color="primary" class="action-button">
+                <mat-icon>play_circle</mat-icon>
+                Comenzar
+              </button>
+            </div> -->
+          </div>
+        </div>
+      </mat-expansion-panel>
+<!--
+      <mat-expansion-panel class="factors-panel">
+        <mat-expansion-panel-header class="panel-header">
+          <mat-panel-title class="panel-title">
+            <mat-icon>analytics</mat-icon>
+            <span>Factores de Rendimiento</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="factors-container">
+          <div class="factor-item">
+            <div class="factor-icon">
+              <mat-icon>psychology</mat-icon>
+            </div>
+            <div class="factor-content">
+              <h3>Estilo de Aprendizaje</h3>
+              <p>Basado en tus preferencias y patrones de interacción</p>
+              <div class="factor-chart">
+                <div class="chart-placeholder"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+       <p *ngIf="factors.preference"><strong>Preferencia:</strong> {{ factors?.preference | percent }}</p>
+      <p><strong>Puntaje Promedio:</strong> {{ factors?.averageScore }}</p>
+      </mat-expansion-panel> -->
+    </mat-accordion>
+  </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,68 +1,113 @@
+<div class="student-form-container">
+  <div class="form-header">
+    <h1 class="form-title">{{ isEditMode ? 'Editar Estudiante' : 'Agregar Estudiante' }}</h1>
+    <div class="form-divider"></div>
+  </div>
 
+  <form [formGroup]="studentForm" (ngSubmit)="saveUser()" class="student-form">
+    <!-- Sección 1: Información Básica -->
+    <div class="form-section">
+      <h2 class="section-title">Información Básica</h2>
+      <div class="form-grid">
+        <mat-form-field  class="form-field">
+          <mat-label>Nombre completo</mat-label>
+          <input matInput formControlName="name" required>
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngIf="studentForm.get('name')?.invalid">Nombre es obligatorio</mat-error>
+        </mat-form-field>
 
+        <mat-form-field  class="form-field">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput formControlName="email" type="email" required>
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="studentForm.get('email')?.invalid">
+            {{ studentForm.get('email')?.errors?.['required'] ? 'Email es obligatorio' : 'Formato inválido' }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
+    <!-- Sección 2: Datos Académicos -->
+    <div class="form-section">
+      <h2 class="section-title">Datos Académicos</h2>
+      <div class="form-grid">
+        <mat-form-field  class="form-field">
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="role" required>
+            <mat-option value="estudiante">Estudiante</mat-option>
+            <mat-option *ngIf="isAdmin()" value="profesor">Profesor</mat-option>
+            <mat-option *ngIf="isAdmin()" value="admin">Admin</mat-option>
+          </mat-select>
+          <mat-icon matPrefix>school</mat-icon>
+          <mat-error>Seleccione un rol</mat-error>
+        </mat-form-field>
 
+        <mat-form-field  class="form-field">
+          <mat-label>Edad</mat-label>
+          <input matInput formControlName="age" type="number">
+          <mat-icon matPrefix>calendar_today</mat-icon>
+          <mat-error *ngIf="studentForm.get('age')?.invalid">
+            Edad entre 1 y 120 años
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
+    <!-- Sección 3: Documentación -->
+    <div class="form-section">
+      <h2 class="section-title">Documentación</h2>
+      <mat-form-field  class="form-field">
+        <mat-label>DNI/NIE</mat-label>
+        <input matInput formControlName="dni" required>
+        <mat-icon matPrefix>badge</mat-icon>
+        <mat-error>Documento obligatorio</mat-error>
+      </mat-form-field>
+    </div>
 
-<div class="form-container">
-  <h2>{{ isEditMode ? 'Editar Estudiante' : 'Agregar Estudiante' }}</h2>
+    <!-- Sección 4: Cursos -->
+    <div class="form-section">
+      <h2 class="section-title">Cursos de Interés</h2>
+      <mat-form-field  class="courses-field">
+        <mat-label>Añadir cursos</mat-label>
+        <mat-chip-grid #chipGrid>
+          <mat-chip-row *ngFor="let course of courses" (removed)="remove(course)">
+            {{ course }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          <input placeholder="Escriba y presione Enter"
+                 [matChipInputFor]="chipGrid"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-grid>
+        <mat-icon matPrefix>menu_book</mat-icon>
+      </mat-form-field>
+    </div>
 
-  <form [formGroup]="studentForm" (ngSubmit)="saveStudent()">
-    <mat-form-field appearance="fill">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="name" required />
-      <mat-error *ngIf="studentForm.get('name')?.invalid">Nombre es obligatorio.</mat-error>
-    </mat-form-field>
+    <!-- Sección 5: Seguridad -->
+    <div *ngIf="!this.isEditMode" class="form-section">
+      <h2 class="section-title">Seguridad</h2>
+      <mat-form-field  class="form-field">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" required>
+        <mat-icon matPrefix>lock</mat-icon>
+        <mat-error *ngIf="studentForm.get('password')?.invalid">
+          Mínimo 6 caracteres
+        </mat-error>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" type="email" required />
-      <mat-error *ngIf="studentForm.get('email')?.invalid">
-        <span *ngIf="studentForm.get('email')?.errors?.['required']">Email es obligatorio.</span>
-        <span *ngIf="studentForm.get('email')?.errors?.['email']">Formato de email no es válido.</span>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Rol</mat-label>
-      <mat-select formControlName="role" required>
-        <mat-option value="estudiante">Estudiante</mat-option>
-        <mat-option value="profesor">Profesor</mat-option>
-        <mat-option value="admin">Admin</mat-option>
-      </mat-select>
-      <mat-error *ngIf="studentForm.get('role')?.invalid">Rol es obligatorio.</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Edad</mat-label>
-      <input matInput formControlName="age" type="number" />
-      <mat-error *ngIf="studentForm.get('age')?.invalid">
-        <span *ngIf="studentForm.get('age')?.errors?.['min']">La edad mínima es 1.</span>
-        <span *ngIf="studentForm.get('age')?.errors?.['max']">La edad máxima es 120.</span>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>DNI</mat-label>
-      <input matInput formControlName="dni" required />
-      <mat-error *ngIf="studentForm.get('dni')?.invalid">DNI es obligatorio.</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Contraseña</mat-label>
-      <input matInput formControlName="password" type="password" required />
-      <mat-error *ngIf="studentForm.get('password')?.invalid">
-        <span *ngIf="studentForm.get('password')?.errors?.['required']">Contraseña es obligatoria.</span>
-        <span *ngIf="studentForm.get('password')?.errors?.['minlength']">Mínimo 6 caracteres.</span>
-      </mat-error>
-    </mat-form-field>
-
-
-    <div class="form-buttons">
-      <button mat-raised-button color="primary" type="submit" [disabled]="studentForm.invalid">
+    <!-- Acciones del Formulario -->
+    <div class="form-actions">
+      <button mat-button type="button" class="cancel-btn" (click)="goList()">
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="studentForm.invalid" class="submit-btn">
+        <mat-icon>{{ isEditMode ? 'save' : 'person_add' }}</mat-icon>
         {{ isEditMode ? 'Actualizar' : 'Guardar' }}
       </button>
-      <button mat-button color="warn" type="button" (click)="goList()">Cancelar</button>
     </div>
   </form>
 </div>

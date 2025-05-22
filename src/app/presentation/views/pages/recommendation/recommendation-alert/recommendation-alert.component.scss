@@ -1,0 +1,239 @@
+/* Estilos mejorados */
+.performance-dashboard {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Spinner de carga */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-content {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.loading-text {
+  margin-top: 1rem;
+  color: #3f51b5;
+  font-weight: 500;
+}
+
+/* Encabezado */
+.performance-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.performance-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #3f51b5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.performance-icon {
+  font-size: 2.2rem;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.performance-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Tarjeta de rendimiento */
+.performance-card {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.performance-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(to bottom, #3f51b5, #2196F3);
+}
+
+.card-header {
+  padding: 1.5rem 1.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.performance-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Estilos para las categorías de rendimiento */
+.excellent-performance .performance-badge {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.normal-performance .performance-badge {
+  background-color: #FFC107;
+  color: #333;
+}
+
+.low-performance .performance-badge {
+  background-color: #F44336;
+  color: white;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.metric-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.metric-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.metric-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.score-icon {
+  background-color: rgba(63, 81, 181, 0.1);
+  color: #3f51b5;
+}
+
+.activities-icon {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.metric-info {
+  flex-grow: 1;
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+.metric-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.metric-progress {
+  height: 6px;
+  border-radius: 3px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.action-button {
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+/* Mensaje de error */
+.error-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error-card {
+  border-left: 4px solid #F44336;
+  border-radius: 8px;
+}
+
+.error-avatar {
+  background-color: #F44336;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Colores para las categorías */
+.excellent-performance {
+  border-top: 4px solid #4CAF50;
+}
+
+.normal-performance {
+  border-top: 4px solid #FFC107;
+}
+
+.low-performance {
+  border-top: 4px solid #F44336;
+}

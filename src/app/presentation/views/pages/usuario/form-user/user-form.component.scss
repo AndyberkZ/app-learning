@@ -1,26 +1,158 @@
-.form-container {
-  max-width: 500px;          /* Ancho máximo del formulario */
-  margin: 40px auto;         /* Centra el formulario horizontalmente */
-  padding: 20px;             /* Espaciado interno */
-  border: 1px solid #ccc;    /* Borde del formulario */
-  border-radius: 8px;        /* Bordes redondeados */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle relieve */
-  background-color: #ffffff; /* Fondo blanco */
+@use '@angular/material' as mat;
+
+.student-form-container {
+  max-width: 700px;
+  margin: 32px auto;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
-h2 {
-  text-align: center;        /* Centra el título */
-  margin-bottom: 20px;
-  color: #333;
+.form-header {
+  padding: 24px 32px 16px;
+  background-color: mat.get-color-from-palette(mat.$indigo-palette, 50);
+
+  .form-title {
+    margin: 0;
+    color: mat.get-color-from-palette(mat.$indigo-palette, 800);
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  .form-divider {
+    height: 2px;
+    background: linear-gradient(90deg, mat.get-color-from-palette(mat.$indigo-palette, 200), transparent);
+    margin-top: 16px;
+  }
 }
 
-.form-buttons {
+.student-form {
+  padding: 0 32px 32px;
+}
+
+.form-section {
+  margin-bottom: 24px;
+
+  .section-title {
+    color: mat.get-color-from-palette(mat.$indigo-palette, 600);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 16px 0 12px;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 16px;
+      background: mat.get-color-from-palette(mat.$indigo-palette, 300);
+      margin-right: 8px;
+      border-radius: 2px;
+    }
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.form-field {
+  width: 100%;
+
+  .mat-icon {
+    color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+    margin-right: 8px;
+  }
+
+  .mat-form-field-outline {
+    background-color: white;
+  }
+}
+
+.courses-field {
+  width: 100%;
+
+  mat-chip-row {
+    background: mat.get-color-from-palette(mat.$indigo-palette, 50);
+    color: mat.get-color-from-palette(mat.$indigo-palette, 800);
+
+    .mat-icon {
+      font-size: 16px;
+      color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+    }
+  }
+}
+
+.form-actions {
   display: flex;
-  justify-content: space-between; /* Espacia los botones */
-  margin-top: 20px;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid mat.get-color-from-palette(mat.$gray-palette, 200);
+
+  .cancel-btn {
+    color: mat.get-color-from-palette(mat.$gray-palette, 600);
+
+    .mat-icon {
+      color: mat.get-color-from-palette(mat.$gray-palette, 600);
+    }
+  }
+
+  .submit-btn {
+    padding: 0 24px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
+    .mat-icon {
+      margin-right: 8px;
+    }
+  }
 }
 
-mat-form-field {
-  width: 100%;               /* Asegura que los campos ocupen el ancho completo */
-  margin-bottom: 16px;        /* Espaciado entre los campos */
+/* Efectos y transiciones */
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: mat.get-color-from-palette(mat.$indigo-palette, 300);
 }
+
+.mat-form-field.mat-focused {
+  .mat-form-field-outline-thick {
+    color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+  }
+
+  .mat-icon {
+    color: mat.get-color-from-palette(mat.$indigo-palette, 700);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .student-form-container {
+    margin: 16px;
+    border-radius: 8px;
+  }
+
+  .form-header {
+    padding: 16px;
+  }
+
+  .student-form {
+    padding: 0 16px 16px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .submit-btn, .cancel-btn {
+    width: 100%;
+  }
+}
+
+
+

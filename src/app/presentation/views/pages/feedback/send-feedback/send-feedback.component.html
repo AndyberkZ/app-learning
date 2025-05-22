@@ -1,0 +1,51 @@
+<div class="feedback-container">
+  <mat-card class="feedback-card mat-elevation-z8">
+    <mat-card-header class="feedback-header">
+      <div class="header-icon">
+        <mat-icon>feedback</mat-icon>
+      </div>
+      <mat-card-title class="feedback-title">Tu Opinión Nos Importa</mat-card-title>
+      <mat-card-subtitle class="feedback-subtitle">Ayúdanos a mejorar compartiendo tu experiencia</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="feedback-form">
+        <!-- Calificación con estrellas -->
+        <div class="rating-container">
+          <label class="rating-label">¿Cómo calificarías esta actividad?</label>
+          <div class="star-rating" formControlName="rating">
+            <mat-icon *ngFor="let star of [1,2,3,4,5]"
+                      (click)="feedbackForm.get('rating').setValue(star)"
+                      [class.active]="star <= feedbackForm.get('rating').value">
+              {{star <= feedbackForm.get('rating').value ? 'star' : 'star_border'}}
+            </mat-icon>
+          </div>
+          <mat-error *ngIf="feedbackForm.get('rating')?.invalid" class="error-message">
+            Por favor selecciona una calificación
+          </mat-error>
+        </div>
+
+        <!-- Comentario -->
+        <mat-form-field  class="form-field">
+          <mat-label>Cuéntanos más...</mat-label>
+          <textarea matInput formControlName="comment" rows="4"
+                    placeholder="¿Qué te gustó o qué podríamos mejorar?"></textarea>
+          <mat-icon matSuffix>edit</mat-icon>
+        </mat-form-field>
+
+        <!-- Botón de Enviar -->
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit"
+                  [disabled]="feedbackForm.invalid" class="submit-button">
+            <mat-icon>send</mat-icon>
+            Enviar Feedback
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+
+    <mat-card-footer class="feedback-footer">
+      <p>Gracias por ayudarnos a crecer ❤️</p>
+    </mat-card-footer>
+  </mat-card>
+</div>

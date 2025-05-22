@@ -1,51 +1,182 @@
-// .list-container {
-//   max-width: 800px;             /* Ancho máximo para la tabla */
-//   margin: 40px auto;            /* Centra la tabla horizontalmente */
-//   padding: 20px;                /* Espaciado interno */
-//   text-align: center;           /* Centra el título */
-// }
-
-// .add-student-button {
-//   display: inline-flex;         /* Alinea el icono y el texto */
-//   align-items: center;          /* Centra verticalmente el icono y el texto */
-//   margin-bottom: 20px;          /* Espaciado debajo del botón */
-//   font-weight: bold;            /* Negrita para destacar el botón */
-//   font-size: 16px;              /* Tamaño de texto más grande */
-// }
-
-// .add-student-button mat-icon {
-//   margin-right: 8px;            /* Espacio entre el icono y el texto */
-// }
-
-// table {
-//   width: 100%;                  /* Ancho completo de la tabla */
-//   margin-top: 20px;
-// }
-
-// h2 {
-//   margin-bottom: 20px;          /* Espacio debajo del título */
-// }
-
-// button[mat-icon-button] {
-//   margin: 0 5px;                /* Espacio entre los botones */
-// }
-
-
-.table-container {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 20px;
+/* Estilos principales */
+.student-list-container {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 16px;
 }
 
-mat-form-field {
+.header-section {
+  margin-bottom: 24px;
+}
+
+.page-title {
+  color: #3f51b5;
+  font-weight: 500;
+  margin-bottom: 16px;
+  font-size: 28px;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.search-field {
+  flex: 2;
+  min-width: 900px;
+}
+
+.add-student-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  height: 48px;
+}
+
+/* Estilos de la tabla */
+.table-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.student-table {
   width: 100%;
-  margin-bottom: 20px;
 }
 
-table {
+.header-row {
+  background-color: #f5f5f5;
+  height: 56px;
+
+  th {
+    font-weight: 600;
+    color: #424242;
+    font-size: 14px;
+  }
+}
+
+.row {
+  height: 56px;
+  border-bottom: 1px solid #e0e0e0;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+
+/* Estilos de celdas específicas */
+.email-cell {
+  color: #1976d2;
+  font-family: monospace;
+}
+
+.role-badge {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.action-icon {
+  transition: all 0.2s ease;
+
+  &.visibility {
+    color: #2196f3;
+  }
+
+  &.edit {
+    color: #ff9800;
+  }
+
+  &.delete {
+    color: #f44336;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+/* Paginador personalizado */
+.custom-paginator {
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  padding: 12px 24px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-field, .add-student-button {
+    width: 100%;
+  }
+}
+
+
+
+.search-container {
+  margin: 16px 0;
+}
+
+.full-width-search {
   width: 100%;
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0; /* Elimina padding extra */
+  }
+
+  .mat-form-field-outline {
+    background-color: white; /* Fondo blanco para mejor legibilidad */
+  }
+
+  .mat-form-field-infix {
+    width: auto; /* Permite que el campo se expanda */
+    min-width: 250px; /* Ancho mínimo */
+    padding: 0.8em 0; /* Ajuste de padding vertical */
+  }
+
+  input {
+    font-size: 14px; /* Tamaño de fuente adecuado */
+    padding: 0 8px; /* Padding interno para el texto */
+  }
+
+  .mat-form-field-label-wrapper {
+    overflow: visible; /* Asegura que el label no se corte */
+  }
 }
 
-mat-paginator {
-  margin-top: 20px;
+/* Agrega esto a tus estilos globales o al componente */
+.mat-dialog-container {
+  border-radius: 8px !important;
+  padding: 24px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Animación para el modal */
+.cdk-overlay-container {
+  .cdk-overlay-backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .cdk-global-overlay-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

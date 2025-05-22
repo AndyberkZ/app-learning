@@ -12,8 +12,8 @@ export class AuthService {
   }
 
   // Simula un método para iniciar sesión y guardar el perfil del usuario
-  login(role: string) {
-    this.userProfile = { role: this.getItem('user') || '' };
+  login() {
+    this.userProfile = { role: this.getItem('role') || '' };
   }
 
   // Simula un método para cerrar sesión
@@ -31,7 +31,7 @@ export class AuthService {
     // console.log('this.userProfile roleee',this.userProfile);
     if (typeof localStorage !== 'undefined') {
       // Puedes usar localStorage aquí
-      this.login('user');
+      this.login();
     }
     return this.userProfile ? this.userProfile.role === role : false;
   }

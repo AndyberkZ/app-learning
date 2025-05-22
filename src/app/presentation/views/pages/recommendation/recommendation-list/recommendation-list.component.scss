@@ -1,71 +1,471 @@
-/* Estilos generales */
-.container {
+// /* Estilos generales */
+// .container {
+//   max-width: 1200px;
+//   margin: 20px auto;
+//   padding: 20px;
+//   background-color: #f5f5f5;
+//   border-radius: 8px;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+// }
+
+// .title {
+//   font-size: 1.8em;
+//   color: #3f51b5;
+//   text-align: center;
+//   margin-bottom: 20px;
+// }
+
+// .subtitle {
+//   font-size: 1.4em;
+//   color: #555;
+//   margin-bottom: 10px;
+// }
+
+// /* Tabla de rendimiento */
+// .performance-table {
+//   width: 100%;
+//   margin-bottom: 20px;
+//   background-color: #ffffff;
+//   border-radius: 8px;
+// }
+
+// .mat-header-cell, .mat-cell {
+//   padding: 12px;
+//   font-size: 1em;
+// }
+
+// .mat-header-row {
+//   background-color: #3f51b5;
+//   color: #ffffff;
+//   font-weight: bold;
+// }
+
+// .mat-row:nth-child(even) {
+//   background-color: #f9f9f9;
+// }
+
+// /* Panel de recomendaciones */
+// .recommendation-panel {
+//   margin-top: 20px;
+// }
+
+// .recommended-list {
+//   list-style-type: none;
+//   padding: 0;
+//   margin: 0;
+// }
+
+// .recommended-list li {
+//   padding: 8px;
+//   font-size: 1em;
+//   background-color: #e8f0fe;
+//   border: 1px solid #c3d1ff;
+//   margin: 5px 0;
+//   border-radius: 4px;
+// }
+
+// /* Factores de rendimiento */
+// mat-expansion-panel {
+//   border-radius: 8px;
+//   margin-bottom: 10px;
+// }
+
+@use '@angular/material' as mat;
+
+.performance-dashboard {
   max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 32px auto;
+  padding: 0;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
-.title {
-  font-size: 1.8em;
-  color: #3f51b5;
-  text-align: center;
-  margin-bottom: 20px;
+.dashboard-header {
+  padding: 24px 32px;
+  background: linear-gradient(135deg, mat.get-color-from-palette(mat.$indigo-palette, 600) 0%,
+              mat.get-color-from-palette(mat.$indigo-palette, 400) 100%);
+  color: white;
+
+  .student-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .student-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+    }
+
+    .student-name {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .student-stats {
+      display: flex;
+      gap: 24px;
+      margin-top: 8px;
+
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        opacity: 0.9;
+
+        mat-icon {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
 }
 
-.subtitle {
-  font-size: 1.4em;
-  color: #555;
-  margin-bottom: 10px;
+.performance-section {
+  padding: 24px 32px;
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+
+    mat-icon {
+      color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+      margin-right: 12px;
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+
+    h2 {
+      margin: 0;
+      color: mat.get-color-from-palette(mat.$indigo-palette, 700);
+      font-size: 22px;
+    }
+  }
 }
 
-/* Tabla de rendimiento */
+.table-container {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
 .performance-table {
   width: 100%;
-  margin-bottom: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
+
+  .header-row {
+    background-color: mat.get-color-from-palette(mat.$indigo-palette, 50);
+    height: 56px;
+
+    .mat-header-cell {
+      color: mat.get-color-from-palette(mat.$indigo-palette, 800);
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  .data-row {
+    height: 64px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: mat.get-color-from-palette(mat.$indigo-palette, 50);
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid mat.get-color-from-palette(mat.$gray-palette, 200);
+    }
+  }
+
+  .mat-cell, .mat-header-cell {
+    padding: 0 16px;
+  }
+
+  .activity-title {
+    //display: flex;
+    align-items: center;
+
+    .activity-icon {
+      color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+      margin-right: 12px;
+    }
+  }
+
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    .tag {
+      background-color: mat.get-color-from-palette(mat.$indigo-palette, 50);
+      color: mat.get-color-from-palette(mat.$indigo-palette, 700);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+
+  .score-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .mat-progress-bar {
+      height: 8px;
+      border-radius: 4px;
+      flex: 1;
+    }
+
+    .score-value {
+      min-width: 30px;
+      text-align: right;
+      font-weight: 500;
+    }
+  }
+
+  .progress-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .mat-progress-spinner {
+      display: inline-block;
+    }
+
+    .progress-value {
+      font-weight: 500;
+    }
+  }
+
+  .time-cell {
+   // display: flex;
+    align-items: center;
+
+    .time-icon {
+      color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+      margin-right: 8px;
+      font-size: 18px;
+    }
+  }
+
+  .preference-container {
+    display: flex;
+
+    .preference-star {
+      color: mat.get-color-from-palette(mat.$amber-palette, 500);
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
 }
 
-.mat-header-cell, .mat-cell {
-  padding: 12px;
-  font-size: 1em;
+.recommendations-section {
+  padding: 0 32px 32px;
+
+  .recommendation-accordion {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .recommendation-panel, .factors-panel {
+    margin-bottom: 8px;
+    border-radius: 12px !important;
+
+    .panel-header {
+      height: 64px;
+      background-color: mat.get-color-from-palette(mat.$indigo-palette, 50);
+
+      .panel-title {
+        display: flex;
+        align-items: center;
+
+        mat-icon {
+          color: mat.get-color-from-palette(mat.$indigo-palette, 700);
+          margin-right: 12px;
+        }
+
+        span {
+          font-size: 16px;
+          font-weight: 500;
+          color: mat.get-color-from-palette(mat.$indigo-palette, 800);
+        }
+      }
+    }
+  }
+
+  .recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    padding: 16px 0;
+
+    .activity-card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+
+        .card-icon {
+          color: mat.get-color-from-palette(mat.$green-palette, 500);
+          margin-right: 12px;
+        }
+
+        .card-title {
+          margin: 0;
+          font-size: 16px;
+          font-weight: 500;
+          color: mat.get-color-from-palette(mat.$indigo-palette, 800);
+        }
+      }
+
+      .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 16px;
+
+        .tag {
+          background-color: mat.get-color-from-palette(mat.$indigo-palette, 50);
+          color: mat.get-color-from-palette(mat.$indigo-palette, 700);
+          padding: 4px 10px;
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+
+      .card-footer {
+        display: flex;
+        justify-content: flex-end;
+
+        .action-button {
+          border-radius: 20px;
+          padding: 0 16px;
+
+          mat-icon {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .factors-container {
+    padding: 16px 0;
+
+    .factor-item {
+      background-color: white;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+
+      .factor-icon {
+        margin-right: 16px;
+
+        mat-icon {
+          color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+          font-size: 32px;
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      .factor-content {
+        flex: 1;
+
+        h3 {
+          margin: 0 0 8px 0;
+          color: mat.get-color-from-palette(mat.$indigo-palette, 800);
+          font-size: 16px;
+        }
+
+        p {
+          margin: 0 0 12px 0;
+          color: mat.get-color-from-palette(mat.$gray-palette, 600);
+          font-size: 14px;
+        }
+
+        .factor-chart {
+          height: 80px;
+          background-color: mat.get-color-from-palette(mat.$gray-palette, 100);
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: mat.get-color-from-palette(mat.$gray-palette, 500);
+        }
+      }
+    }
+  }
 }
 
-.mat-header-row {
-  background-color: #3f51b5;
-  color: #ffffff;
-  font-weight: bold;
+/* Funciones de ayuda para colores */
+@function getScoreColor($score) {
+  @if $score >= 80 {
+    @return 'primary';
+  } @else if $score >= 50 {
+    @return 'accent';
+  } @else {
+    @return 'warn';
+  }
 }
 
-.mat-row:nth-child(even) {
-  background-color: #f9f9f9;
+@function getProgressColor($progress) {
+  @if $progress >= 80 {
+    @return 'primary';
+  } @else if $progress >= 50 {
+    @return 'accent';
+  } @else {
+    @return 'warn';
+  }
 }
 
-/* Panel de recomendaciones */
-.recommendation-panel {
-  margin-top: 20px;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-header {
+    padding: 16px;
 
-.recommended-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+    .student-info {
+      flex-direction: column;
+      align-items: flex-start;
 
-.recommended-list li {
-  padding: 8px;
-  font-size: 1em;
-  background-color: #e8f0fe;
-  border: 1px solid #c3d1ff;
-  margin: 5px 0;
-  border-radius: 4px;
-}
+      .student-icon {
+        margin-bottom: 12px;
+      }
 
-/* Factores de rendimiento */
-mat-expansion-panel {
-  border-radius: 8px;
-  margin-bottom: 10px;
+      .student-stats {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  }
+
+  .performance-section, .recommendations-section {
+    padding: 16px;
+  }
+
+  .recommendations-grid {
+    grid-template-columns: 1fr;
+  }
 }

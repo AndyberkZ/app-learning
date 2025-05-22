@@ -14,6 +14,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../../../../shared/component/modal-confirmation/modal-confirmation.component';
 
 @Component({
   selector: 'app-user-list',
@@ -24,7 +26,91 @@ import { MatIconModule } from '@angular/material/icon';
  styleUrls: ['./user-list.component.scss']
 })
 export class StudentListComponent implements OnInit {
-  // displayedColumns: string[] = ['name', 'email', 'role', 'dni', 'actions'];
+
+
+  displayedColumns: string[] = ['name', 'email', 'role', 'dni','actions'];
+  dataSource = new MatTableDataSource<any>();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private dialog: MatDialog, private studentService: StudentService, private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.fetchStudents();
+  }
+
+  isAdmin(): boolean {
+    return this.authService.hasRole('admin');
+  }
+  isUser(): boolean {
+    return this.authService.hasRole('estudiante');
+  }
+
+  isTeacher(): boolean {
+    return this.authService.hasRole('profesor');
+  }
+
+  fetchStudents(): void {
+    this.studentService.getStudents().subscribe((students) => {
+      this.dataSource.data = students;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+   editStudent(id: string): void {
+    this.router.navigate(['/students/edit', id]);
+  }
+
+  goRecomendacion(id: string): void {
+    this.router.navigate(['/students/performance', id]);
+  }
+
+  // deleteStudent(id: string): void {
+  //   this.studentService.deleteStudent(id).subscribe(() => {
+  //     this.fetchStudents();
+  //   });
+  // }
+
+  addStudent(): void {
+    this.router.navigate(['/students/new']);
+  }
+
+
+
+
+deleteStudent(id: string, student: any): void {
+  const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    width: '500px',
+    data: {
+      studentName: student.name,
+      studentEmail: student.email,
+      studentDni: student.dni
+    },
+    panelClass: 'custom-dialog-container'
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.studentService.deleteStudent(id).subscribe({
+        next: () => {
+          this.fetchStudents();
+          //this.showSuccessMessage(studentName);
+        },
+        error: (err) => {
+         // this.showErrorMessage(err);
+        }
+      });
+    }
+  });
+}
+    // displayedColumns: string[] = ['name', 'email', 'role', 'dni', 'actions'];
   // students = [];
 
   // dataSource = new MatTableDataSource<Student>();
@@ -65,43 +151,4 @@ export class StudentListComponent implements OnInit {
   //   this.router.navigate(['/students/new']);
   // }
 
-
-  displayedColumns: string[] = ['name', 'email', 'role', 'dni','actions'];
-  dataSource = new MatTableDataSource<any>();
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private studentService: StudentService, private router: Router) {}
-
-  ngOnInit(): void {
-    this.fetchStudents();
-  }
-
-  fetchStudents(): void {
-    this.studentService.getStudents().subscribe((students) => {
-      this.dataSource.data = students;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-   editStudent(id: string): void {
-    this.router.navigate(['/students/edit', id]);
-  }
-
-  goRecomendacion(id: string): void {
-    this.router.navigate(['/students/performance', id]);
-  }
-
-  deleteStudent(id: string): void {
-    this.studentService.deleteStudent(id).subscribe(() => {
-      this.fetchStudents();
-    });
-  }
 }

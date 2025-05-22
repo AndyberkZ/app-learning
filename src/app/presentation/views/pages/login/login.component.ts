@@ -33,6 +33,12 @@ export class LoginComponent {
     });
   }
 
+  ngOnInit() {
+    this.router.events.subscribe(event => {
+      console.log('Router event:', event);
+    });
+  }
+
   onLogin(): void {
     if (this.loginForm.invalid) {
       return;
@@ -42,13 +48,14 @@ export class LoginComponent {
 
     this.loginService.login({email, password}).subscribe({
       next: (response) => {
-        if(email.includes('admin')){
-          localStorage.setItem('user','admin');
-        }else{
-          localStorage.setItem('user','user');
-        }
+        // if(email.includes('admin')){
+        //   localStorage.setItem('user','admin');
+        // }else if(){
+        // }else{
+        //   localStorage.setItem('user','user');
+        // }
         localStorage.setItem('token', response.token); // Guarda el token en el almacenamiento local
-        this.router.navigate(['/students/list']); // Redirige después del login exitoso
+        this.router.navigate(['/home']); // Redirige después del login exitoso
       },
       error: (error) => {
         this.errorMessage = 'Credenciales incorrectas';
@@ -56,6 +63,12 @@ export class LoginComponent {
     });
   }
 
+
+  onForget(): void {
+
+        this.router.navigate(['/forgot-password']); // Redirige después del login exitoso
+
+  }
 
   // onLogin(): void {
   //   if (this.loginForm.valid) {

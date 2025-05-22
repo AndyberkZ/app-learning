@@ -1,0 +1,133 @@
+@use '@angular/material' as mat;
+
+.activities-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: 16px;
+}
+
+.activities-table {
+  width: 100%;
+  min-width: 800px; // Mínimo para buena visualización
+  border-radius: 12px;
+  overflow: hidden;
+
+  .header-row {
+    height: 56px;
+    background-color: mat.get-color-from-palette(mat.$indigo-palette, 700);
+
+    .table-header {
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    .actions-header {
+      justify-content: center;
+    }
+  }
+
+  .data-row {
+    height: 64px;
+    transition: background-color 0.2s ease;
+
+    &:nth-child(even) {
+      background-color: rgba(mat.get-color-from-palette(mat.$indigo-palette, 50), 0.3);
+    }
+
+    &:hover {
+      background-color: mat.get-color-from-palette(mat.$indigo-palette, 50);
+    }
+  }
+
+  .activity-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    color: mat.get-color-from-palette(mat.$indigo-palette, 800);
+
+    .activity-icon {
+      color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+    }
+  }
+
+  .activity-tags {
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      background-color: mat.get-color-from-palette(mat.$indigo-palette, 50);
+      color: mat.get-color-from-palette(mat.$indigo-palette, 700);
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: mat.get-color-from-palette(mat.$indigo-palette, 100);
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  .activity-actions {
+    display: flex;
+    justify-content: center;
+
+    .action-button {
+      transition: all 0.2s ease;
+      color: mat.get-color-from-palette(mat.$indigo-palette, 500);
+
+      &:hover {
+        color: mat.get-color-from-palette(mat.$indigo-palette, 700);
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 960px) {
+  .activities-container {
+    padding: 8px;
+  }
+
+  .activities-table {
+    min-width: 100%;
+
+    .data-row, .header-row {
+      height: auto;
+      padding: 12px 0;
+    }
+
+    .activity-name {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .tags-container {
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+}

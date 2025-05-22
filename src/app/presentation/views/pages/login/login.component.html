@@ -1,41 +1,5 @@
 
-<!-- <div class="min-h-screen flex items-center justify-center bg-gray-100">
-  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-    <h2 class="text-2xl font-bold text-center mb-6">Iniciar Sesión</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <div class="mb-4">
-        <label for="email" class="block text-gray-700 font-semibold mb-2">Correo</label>
-        <input
-          formControlName="email"
-          type="email"
-          id="email"
-          class="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-500"
-          placeholder="Ingrese su correo"
-        />
-      </div>
-      <div class="mb-6">
-        <label for="password" class="block text-gray-700 font-semibold mb-2">Contraseña</label>
-        <input
-          formControlName="password"
-          type="password"
-          id="password"
-          class="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-500"
-          placeholder="Ingrese su contraseña"
-        />
-      </div>
-      <button
-        type="submit"
-        class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
-      >
-        Iniciar Sesión
-      </button>
-      <p class="mt-4 text-center text-gray-600">
-        ¿No tienes cuenta? <a href="/register" class="text-blue-500 hover:underline">Regístrate</a>
-      </p>
-    </form>
-  </div>
-</div> -->
-
+<!--
 <div class="login-container">
   <h2>Iniciar Sesión</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
@@ -53,5 +17,70 @@
 
     <button mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <br>
+    <div class="forgot-password-link">
+      <a (click)="onForget()">¿Olvidaste tu contraseña?</a>
+    </div>
+
   </form>
+</div> -->
+
+
+
+
+
+
+
+<div class="login-wrapper">
+  <div class="login-container">
+    <div class="login-header">
+      <div class="logo-container">
+        <mat-icon class="logo-icon">school</mat-icon>
+        <span class="logo-text">MiRuta</span>
+      </div>
+      <h1 class="login-title">Iniciar Sesión</h1>
+      <p class="login-subtitle">Ingresa tus credenciales para acceder al sistema</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+      <mat-form-field class="form-field">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput formControlName="email" type="email" required>
+        <mat-icon matPrefix>alternate_email</mat-icon>
+        <mat-error *ngIf="loginForm.get('email')?.invalid">
+          Por favor ingresa un correo válido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" required>
+        <mat-icon matPrefix>lock</mat-icon>
+        <mat-error *ngIf="loginForm.get('password')?.invalid">
+          La contraseña es requerida
+        </mat-error>
+      </mat-form-field>
+
+
+
+      <button mat-raised-button color="primary" class="login-button" type="submit" [disabled]="loginForm.invalid">
+        <mat-icon>login</mat-icon>
+        INGRESAR
+      </button>
+
+      <div *ngIf="errorMessage" class="error-message">
+        <mat-icon>error_outline</mat-icon>
+        {{ errorMessage }}
+      </div>
+
+      <div class="form-options" >
+        <a class="forgot-password" (click)="onForget()">¿Olvidaste tu contraseña?</a>
+      </div>
+    </form>
+
+    <!-- <div class="login-footer">
+      <p>¿No tienes una cuenta? <a class="register-link" [routerLink]="['/register']">Regístrate aquí</a></p>
+    </div> -->
+  </div>
 </div>

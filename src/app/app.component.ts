@@ -6,7 +6,7 @@ import { StudentService } from './shared/services/user.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, MenuComponent],
   providers:[StudentService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

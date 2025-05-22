@@ -19,6 +19,7 @@ export class LoginService {
     return this.http.post<{ token: string, role: string }>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         console.log('response',response);
+        console.log('rolerolerolerolerolerolerole',response.role);
         localStorage.setItem('token', response.token);
         localStorage.setItem('role', response.role); // Guarda el rol del usuario
       })
@@ -35,6 +36,7 @@ export class LoginService {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.router.navigate(['/login']);
   }
 }

@@ -1,0 +1,169 @@
+/* Estilos mejorados */
+.feedback-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.feedback-card {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feedback-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.feedback-header {
+  background: linear-gradient(90deg, #3f51b5 0%, #2196F3 100%);
+  color: white;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.header-icon {
+  margin: 0 auto 1rem;
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-icon mat-icon {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+}
+
+.feedback-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.feedback-subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.feedback-form {
+  padding: 2rem;
+}
+
+.rating-container {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.rating-label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.star-rating {
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.star-rating mat-icon {
+  color: #FFC107;
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.star-rating mat-icon:hover {
+  transform: scale(1.2);
+}
+
+.star-rating mat-icon.active {
+  color: #FF9800;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.form-field mat-icon {
+  color: #3f51b5;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  display: block;
+  text-align: center;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.submit-button {
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.submit-button mat-icon {
+  margin-right: 8px;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.feedback-footer {
+  text-align: center;
+  padding: 1rem;
+  background: #f5f5f5;
+  color: #666;
+  font-style: italic;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0; /* Espacio vertical adicional */
+}
+
+.star-rating mat-icon {
+  color: #FFC107;
+  font-size: 2.5rem;
+  width: 2.5rem; /* Asegura que el ancho coincida con el tamaño de fuente */
+  height: 2.5rem; /* Asegura que el alto coincida con el tamaño de fuente */
+  cursor: pointer;
+  transition: transform 0.2s;
+  overflow: visible; /* Asegura que nada se corte */
+  line-height: normal; /* Evita problemas de alineación vertical */
+}
+
+.star-rating mat-icon:hover {
+  transform: scale(1.2);
+}
+
+.star-rating mat-icon.active {
+  color: #FF9800;
+}

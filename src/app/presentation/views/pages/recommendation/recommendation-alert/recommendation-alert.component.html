@@ -1,0 +1,93 @@
+<div class="performance-dashboard">
+  <!-- Spinner de carga -->
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="loading-content">
+      <mat-spinner diameter="60" color="accent"></mat-spinner>
+      <p class="loading-text">Analizando tu rendimiento...</p>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div *ngIf="!isLoading && performanceData && isUser()" class="performance-content">
+    <div class="performance-header">
+      <h2 class="performance-title">
+        <mat-icon class="performance-icon">insights</mat-icon>
+        Tu Progreso Académico
+      </h2>
+      <p class="performance-subtitle">Resumen de tu desempeño en las actividades</p>
+    </div>
+
+    <mat-card class="performance-card" [ngClass]="getPerformanceClass(performanceData.performanceCategory)">
+      <div class="card-decoration"></div>
+
+      <mat-card-header class="card-header">
+        <mat-card-title class="card-title">
+          <mat-icon>school</mat-icon>
+          Rendimiento General
+        </mat-card-title>
+        <div class="performance-badge">
+          {{ performanceData.performanceCategory }}
+        </div>
+      </mat-card-header>
+
+      <mat-card-content class="card-content">
+        <div class="metric-container">
+          <div class="metric-item">
+            <div class="metric-icon score-icon">
+              <mat-icon>star</mat-icon>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Puntaje Promedio</span>
+              <span class="metric-value">{{ performanceData.averageScore }}</span>
+              <mat-progress-bar class="metric-progress"
+                mode="determinate"
+                [value]="performanceData.averageScore * 10"
+                [color]="getProgressColor(performanceData.averageScore)">
+              </mat-progress-bar>
+            </div>
+          </div>
+
+          <div class="metric-item">
+            <div class="metric-icon activities-icon">
+              <mat-icon>assignment</mat-icon>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Actividades Completadas</span>
+              <span class="metric-value">{{ performanceData.totalActivities }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <!-- <mat-card-actions class="card-actions">
+        <button mat-stroked-button color="primary" class="action-button">
+          <mat-icon>trending_up</mat-icon>
+          Ver Detalles
+        </button>
+        <button mat-stroked-button color="accent" class="action-button">
+          <mat-icon>lightbulb</mat-icon>
+          Recomendaciones
+        </button>
+      </mat-card-actions> -->
+    </mat-card>
+  </div>
+
+  <!-- Mensaje de error -->
+  <!-- <div *ngIf="error && isUser()" class="error-container">
+    <mat-card class="error-card">
+      <mat-card-header>
+        <div mat-card-avatar class="error-avatar">
+          <mat-icon>error_outline</mat-icon>
+        </div>
+        <mat-card-title>Ocurrió un error</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ error }}</p>
+        <button mat-raised-button color="warn" (click)="retryLoading()">
+          <mat-icon>refresh</mat-icon>
+          Reintentar
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div> -->
+</div>

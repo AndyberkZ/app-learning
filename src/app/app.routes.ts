@@ -6,74 +6,59 @@ import { StudentListComponent } from './presentation/views/pages/usuario/list-us
 import { StudentFormComponent } from './presentation/views/pages/usuario/form-user/user-form.component';
 
 export const routes: Routes = [
-  // {
-  //   path: 'login',
-  //   loadComponent: () => import('./presentation/views/pages/login/login.component').then(m => m.LoginComponent) // Carga perezosa del componente de login
-  // },
-  // {
-  //   path: 'register',
-  //   loadComponent: () => import('./presentation/views/pages/profile/register-profile/register-profile.component').then(m => m.RegisterProfileComponent) // Carga perezosa del componente de registro
-  // },
-  // {
-  //   path: 'edit-profile',
-  //   loadComponent: () => import('./presentation/views/pages/profile/edit-profile/edit-profile.component').then(m => m.EditProfileComponent) // Carga perezosa del componente de edición de perfil
-  // },
-  // {
-  //   path: 'admin-progress',
-  //   loadComponent: () => import('./presentation/views/pages/progress/admin-progress/admin-progress.component').then(m => m.AdminProgressComponent) // Carga perezosa del componente de registro
-  // },
-  // {
-  //   path: 'user-progress',
-  //   loadComponent: () => import('./presentation/views/pages/progress/user-progress/user-progress.component').then(m => m.UserProgressComponent) // Carga perezosa del componente de edición de perfil
-  // },
-
   // // { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redireccionamiento a login
-  // // { path: '**', redirectTo: '/login', pathMatch: 'full' }
+  // // {h: '**', redirectTo: '/login', pathMatch: 'full' }
   {
     path: 'home',
     loadComponent: () => import('./presentation/views/pages/home/home.component').then(m => m.HomeComponent), // Carga perezosa del componente home
     //canActivate: [authGuard] // Usar la nueva función de guard
   },
 
-  // {
-  //   path: 'recommendation',
-  //   loadComponent: () => import('./presentation/views/pages/recommendation/recommendation-list/recommendation-list.component').then(m => m.StudentPerformanceComponent), // Carga perezosa del componente home
-  //   //canActivate: [authGuard] // Usar la nueva función de guard
-  // },
+  {
+    path: 'feedback',
+    loadComponent: () => import('./presentation/views/pages/feedback/home-feedback/home-feedback.component').then(m => m.HomeFeedbackComponent),
+    children: [
+      {
+        path: 'list',
+        loadComponent: () => import('./presentation/views/pages/feedback/list-feedback/list-feedback.component').then(m => m.FeedbackListComponent), // Carga perezosa del componente home
+      },
+    ]
+  },
 
   {
     path: 'recommendation',
-    loadComponent: () => import('./presentation/views/pages/home/home.component').then(m => m.HomeComponent),
+    loadComponent: () => import('./presentation/views/pages/recommendation/recommendation-home/recommendation-home.component').then(m => m.HomeRecommendationComponent),
     children: [
       {
         path: 'list',
         loadComponent: () => import('./presentation/views/pages/recommendation/recommendation-list/recommendation-list.component').then(m => m.StudentPerformanceComponent), // Carga perezosa del componente home
       },
+      {
+        path: 'alert',
+        loadComponent: () => import('./presentation/views/pages/recommendation/recommendation-alert/recommendation-alert.component').then(m => m.AlertPerformanceComponent), // Carga perezosa del componente home
+      },
     ]
   },
-  // { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redireccionar a home después de iniciar sesión
-  // { path: '**', redirectTo: '/home', pathMatch: 'full' }
+  {
+    path: 'activities',
+    loadComponent: () => import('./presentation/views/pages/activities/home-activities/home-activities.component').then(m => m.HomeActivitiesComponent),
+    children: [
+      {
+        path: 'list',
+        loadComponent: () => import('./presentation/views/pages/activities/list-activities/list-activities.component').then(m => m.ActivitiesListComponent), // Carga perezosa del componente home
+      },
+      {
+        path: 'edit/:id',
+        loadComponent: () => import('./presentation/views/pages/feedback/send-feedback/send-feedback.component').then(m => m.FeedbackSendComponent),
+        // canActivate: [authGuard],
+        // data: { roles: ['admin'] }
+      },
+    ]
+  },
 
-  //{ path: '', redirectTo: '/students/list', pathMatch: 'full' },
-
-  // Sección de Estudiantes
-  // {
-  //   path: 'students',
-  //   component: HomeComponent,
-  //   children: [
-  //     { path: 'list', loadComponent: () => import('./presentation/views/pages/usuario/list-user/user-list.component').then(m => m.StudentListComponent)  },
-  //     { path: 'new', loadComponent: () => import('./presentation/views/pages/usuario/form-user/user-form.component').then(m => m.StudentFormComponent)  },
-  //     { path: 'edit/:id', component: StudentFormComponent, canActivate: [authGuard] }
-  //   ]
-  // },
-
-
- // { path: '', redirectTo: '/students/list', pathMatch: 'full' },
-
-  // Rutas de estudiantes
   {
     path: 'students',
-    loadComponent: () => import('./presentation/views/pages/home/home.component').then(m => m.HomeComponent),
+    loadComponent: () => import('./presentation/views/pages/usuario/home-user/home-user.component').then(m => m.HomeUserComponent),
     children: [
       {
         path: 'list',
@@ -104,28 +89,16 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./presentation/views/pages/login/login.component').then(m => m.LoginComponent) // Carga perezosa del componente de login
   },
+  {
+    path: 'forgot-password',
+    loadComponent: () => import('./presentation/views/pages/password/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent ) // Carga perezosa del componente de login
+  },
+  {
+    path: 'reset-password/:token',
+    loadComponent: () => import('./presentation/views/pages/password/reset-password/reset-password.component').then(m => m.ResetPasswordComponent ) // Carga perezosa del componente de login
+  },
    { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redireccionar a home después de iniciar sesión
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
 
-  // // Sección de Cursos
-  // {
-  //   path: 'courses',
-  //   component: HomeComponent,
-  //   children: [
-  //     { path: 'list', component: CourseListComponent },
-  //     { path: 'new', component: CourseFormComponent, canActivate: [AuthGuard], data: { roles: ['admin', 'profesor'] } },
-  //     { path: 'edit/:id', component: CourseFormComponent, canActivate: [AuthGuard], data: { roles: ['admin', 'profesor'] } }
-  //   ]
-  // },
-
-  // // Sección de Profesores
-  // {
-  //   path: 'teachers',
-  //   component: HomeComponent,
-  //   children: [
-  //     { path: 'list', component: TeacherListComponent },
-  //     { path: 'new', component: TeacherFormComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
-  //     { path: 'edit/:id', component: TeacherFormComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } }
-  //   ]
-  // }
+  // Sección de Curso
 ];

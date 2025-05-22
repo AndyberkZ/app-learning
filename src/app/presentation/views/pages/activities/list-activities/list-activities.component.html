@@ -1,0 +1,51 @@
+<div class="activities-container">
+  <mat-table [dataSource]="activities" class="activities-table mat-elevation-z8">
+    <!-- Nombre -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef class="table-header">
+        <div class="header-content">
+          <mat-icon>title</mat-icon>
+          <span>Nombre</span>
+        </div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let activity" class="activity-name">
+        <mat-icon class="activity-icon">assignment</mat-icon>
+        <span>{{ activity.title }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Etiquetas -->
+    <ng-container matColumnDef="contentTags">
+      <mat-header-cell *matHeaderCellDef class="table-header">
+        <div class="header-content">
+          <mat-icon>label</mat-icon>
+          <span>Etiquetas</span>
+        </div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let activity" class="activity-tags">
+        <div class="tags-container">
+          <span *ngFor="let tag of activity.contentTags" class="tag">{{ tag }}</span>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Acciones -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef class="table-header actions-header">
+        <div class="header-content">
+          <mat-icon>settings</mat-icon>
+          <span>Acciones</span>
+        </div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let activity" class="activity-actions">
+        <button mat-icon-button class="action-button" (click)="feedback(activity._id)"
+                matTooltip="Dar feedback" aria-label="Dar feedback">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns" class="data-row"></mat-row>
+  </mat-table>
+</div>

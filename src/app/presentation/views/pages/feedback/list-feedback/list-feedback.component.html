@@ -1,0 +1,39 @@
+<mat-card class="custom-card">
+  <mat-card-title class="card-title">📊 Resumen de Feedback</mat-card-title>
+
+  <mat-table [dataSource]="analysisData" class="styled-table mat-elevation-z8">
+    <!-- Actividad -->
+    <ng-container matColumnDef="activityName">
+      <mat-header-cell *matHeaderCellDef class="header-cell">Actividad</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="activity-cell">
+        <mat-icon color="primary" fontIcon="assignment" class="icon-cell"></mat-icon>
+        {{ row.activityDetails?.title || 'Sin Nombre' }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Calificación Promedio -->
+    <ng-container matColumnDef="averageRating">
+      <mat-header-cell *matHeaderCellDef class="header-cell right-align">Calificación</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="rating-cell right-align" [ngClass]="{
+        'high-rating': row.averageRating >= 4,
+        'mid-rating': row.averageRating >= 3 && row.averageRating < 4,
+        'low-rating': row.averageRating < 3
+      }">
+        {{ row.averageRating | number: '1.1-1' }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Total Feedback -->
+    <ng-container matColumnDef="feedbackCount">
+      <mat-header-cell *matHeaderCellDef class="header-cell right-align">Feedback</mat-header-cell>
+      <mat-cell *matCellDef="let row" class="feedback-cell right-align">
+        <mat-icon color="accent" fontIcon="feedback" class="icon-small"></mat-icon>
+        {{ row.feedbackCount }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Filas -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</mat-card>

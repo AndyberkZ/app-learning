@@ -32,16 +32,42 @@ export class StudentService {
 
   // Método POST: Crear un nuevo estudiante
   createStudent(student: Student): Observable<Student> {
-    return this.http.post<Student>(this.apiUrl, student);
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<Student>(this.apiUrl, student, { headers });
   }
 
   // Método PUT: Actualizar un estudiante
   updateStudent(id: string, student: Student): Observable<Student> {
-    return this.http.put<Student>(`${this.apiUrl}/${id}`, student);
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<Student>(`${this.apiUrl}/${id}`, student, { headers });
   }
 
   // Método DELETE: Eliminar un estudiante
   deleteStudent(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
+  }
+
+  getAveragePerformance(studentId: string): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.apiUrl}/${studentId}/average-performance`, { headers });
+  }
+
+  getCourses() {
+    return [
+      'Matemáticas', 'Ciencia', 'Historia', 'Geografía', 'Lenguaje', 'Arte', 'Deportes'
+    ];
+  }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password/${token}`, { newPassword });
   }
 }
